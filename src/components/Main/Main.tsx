@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './Main.module.css'
+import {MyPosts} from "./MyPosts/MyPosts";
 
 
 export function Profile() {
@@ -11,20 +12,8 @@ export function Profile() {
             <div>
                 <img src="https://drasler.ru/wp-content/uploads/2020/02/Аватарка-для-мастера-маникюра-009.jpg" alt=""/>
             </div>
-            <div>
-                my posts
-                <div>
-                    new post
-                </div>
-                <div className={styles.posts}>
-                    <div className={styles.item}>
-                        post 1
-                    </div>
-                    <div className={styles.item}>
-                        post 2
-                    </div>
-                </div>
-            </div>
+            <MyPosts />
+
         </div>
     )
 }
