@@ -5,7 +5,7 @@ import styles from './Header.module.css'
 export function Header() {
     return (
         <header className={styles.header}>
-            <img src="https://c.neh.tw/thumb/f/350/m2H7H7H7G6H7m2A0.jpg" alt="Logo Rose"/>
+            <img src="https://cdn.pixabay.com/photo/2019/03/20/04/17/rose-4067617_640.png" alt="Logo Rose"/>
         </header>
     )
 }
