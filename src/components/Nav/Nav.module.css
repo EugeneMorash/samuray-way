@@ -1,4 +1,17 @@
 .nav {
     grid-area: navName;
     background-color: bisque;
+    padding: 20px;
+
+}
+
+.item {
+    margin-bottom: 18px;
+    color: brown;
+    text-decoration: none;
+}
+
+.active {
+    color: green;
+    text-decoration: none;
 }

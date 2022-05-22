@@ -1,14 +1,17 @@
 import React from "react";
 import styles from './Nav.module.css'
+import {NavLink} from "react-router-dom";
 
 export function Nav() {
     return(
         <nav className={styles.nav}>
-            <div className={styles.item}><a href='/Main'>Profile</a></div>
-            <div className={styles.item}><a href='/Dialogs'>Messages</a></div>
-            <div className={styles.item}><a href='/Works'>Works</a></div>
-            <div className={styles.item}><a href='/Diplomas'>Diplomas</a></div>
-            <div className={styles.item}><a href='/Contacts'>Contacts</a></div>
+            <div className={styles.item}><NavLink to='/Main' className={navData => navData.isActive ? styles.active : styles.item}>Profile</NavLink></div>
+            <div className={styles.item}><NavLink to='/Dialogs' className={navData => navData.isActive ? styles.active : styles.item}>Messages</NavLink></div>
+            <div className={styles.item}><NavLink to='/Works' className={navData => navData.isActive ? styles.active : styles.item}>Works</NavLink></div>
+            <div className={styles.item}><NavLink to='/Diplomas' className={navData => navData.isActive ? styles.active : styles.item}>Diplomas</NavLink></div>
+            <div className={styles.item}><NavLink to='/Contacts' className={navData => navData.isActive ? styles.active : styles.item}>Contacts</NavLink></div>
         </nav>
     )
 }
+
+// className={navData => navData.isActive ? styles.active : styles.nav}
