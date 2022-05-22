@@ -2,3 +2,6 @@
     grid-area: mainName;
 }
 
+.main img {
+    width: 600px;
+}
