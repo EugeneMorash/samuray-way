@@ -18,11 +18,12 @@ const App = () => {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs' element={<Dialogs/>}/>
-                        <Route path='/main' element={<Profile/>}/>
-                        <Route path='/works' element={<Works/>}/>
-                        <Route path='/diplomas' element={<Diplomas/>}/>
-                        <Route path='/contacts' element={<Contacts/>}/>
+                        {/* /dialogs/* --> exact */}
+                        <Route path='/dialogs/*' element={<Dialogs/>}/>
+                        <Route path='/main/*' element={<Profile/>}/>
+                        <Route path='/works/*' element={<Works/>}/>
+                        <Route path='/diplomas/*' element={<Diplomas/>}/>
+                        <Route path='/contacts/*' element={<Contacts/>}/>
                     </Routes>
                 </div>
             </div>
