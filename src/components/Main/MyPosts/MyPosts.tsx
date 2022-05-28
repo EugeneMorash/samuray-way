@@ -2,20 +2,13 @@ import React from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
+import {PostsArrayType} from "../../../index";
 
-export type PostsArrayType = Array<postsTypes>
-export type postsTypes = {
-    id: number
-    message: string
-    likesCount: number
+type MyPostsPropsType = {
+    posts: PostsArrayType
 }
 
-export function MyPosts() {
-
-    const posts = [
-        {id: 1, message: 'Hi! Let\'s go working!', likesCount: 18},
-        {id: 2, message: 'Do it yourself!', likesCount: 84}
-    ]
+export function MyPosts(props: MyPostsPropsType) {
 
     return (
         <div className={styles.postsBlock}>
@@ -29,7 +22,7 @@ export function MyPosts() {
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post postsArray={posts}/>
+                <Post posts={props.posts}/>
             </div>
         </div>
 
