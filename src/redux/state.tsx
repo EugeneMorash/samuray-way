@@ -1,30 +1,31 @@
 
-export type DialogsDataArrayType = Array<DialogsDataType>
-export type DialogsDataType = {
-    id: number
-    name: string
-}
-
-export type MessagesDataArrayType = Array<MessagesDataType>
-export type MessagesDataType = {
-    id: number
-    message: string
-}
-
-
-
-
 export type StateType = {
     profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
 export type ProfilePageType = {
     posts: Array<PostsType>
 }
+
 export type PostsType = {
     id: number
     message: string
     likesCount: number
+}
+
+export type DialogsPageType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+}
+
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+export type MessagesDataType = {
+    id: number
+    message: string
 }
 
 const state: StateType = {
@@ -44,13 +45,13 @@ const state: StateType = {
             { id: 5, name: 'Yulia' },
             { id: 6, name: 'Michael' }
         ],
-        // messagesData: [
-        //     { id: 1, message: 'What\'s up?' },
-        //     { id: 2, message: 'Hi!' },
-        //     { id: 3, message: 'Shalom!' },
-        //     { id: 4, message: 'Buenos Dias!' },
-        //     { id: 5, message: 'Privet!' }
-        // ]
+        messagesData: [
+            { id: 1, message: 'What\'s up?' },
+            { id: 2, message: 'Hi!' },
+            { id: 3, message: 'Shalom!' },
+            { id: 4, message: 'Buenos Dias!' },
+            { id: 5, message: 'Privet!' }
+        ]
     }
 }
 

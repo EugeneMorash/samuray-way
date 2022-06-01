@@ -8,16 +8,13 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
-import {DialogsDataArrayType, MessagesDataArrayType, PostsArrayType} from "./index";
+import state, {StateType} from "./redux/state";
 
-type DialogsType = {
-    dialogsData: DialogsDataArrayType
-    messagesData: MessagesDataArrayType
-    posts: PostsArrayType
+type StatesType = {
+    state: StateType
 }
 
-
-const App = (props: DialogsType) => {
+const App = (props: StatesType) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -27,8 +24,11 @@ const App = (props: DialogsType) => {
                     <Routes>
                         {/* /dialogs/* --> exact */}
                         <Route path='/dialogs/*'
-                               element={<Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>}/>
-                        <Route path='/main/*' element={<Profile posts={props.posts}/>}/>
+                               element={<Dialogs
+                                   state={props.state}/>}/>
+                        <Route path='/main/*'
+                               element={<Profile
+                                   state={props.state}/>}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
                         <Route path='/contacts/*' element={<Contacts/>}/>

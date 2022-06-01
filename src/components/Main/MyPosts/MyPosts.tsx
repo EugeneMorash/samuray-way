@@ -2,10 +2,10 @@ import React from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {PostsArrayType} from "../../../index";
+import {StateType} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    posts: PostsArrayType
+    posts: StateType
 }
 
 export function MyPosts(props: MyPostsPropsType) {
@@ -22,7 +22,7 @@ export function MyPosts(props: MyPostsPropsType) {
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post posts={props.posts}/>
+                <Post state={props.posts}/>
             </div>
         </div>
 
