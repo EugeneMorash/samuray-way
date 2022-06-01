@@ -8,7 +8,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
-import state, {StateType} from "./redux/state";
+import {StateType} from "./redux/state";
 
 type StatesType = {
     state: StateType

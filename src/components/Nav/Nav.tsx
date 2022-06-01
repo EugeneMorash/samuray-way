@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './Nav.module.css'
 import {NavLink} from "react-router-dom";
+import {Friends} from "./Friends";
 
 export function Nav() {
     // type IsActiveType = {isActive: boolean}
@@ -14,6 +15,8 @@ export function Nav() {
             <div className={styles.item}><NavLink to='/works' className={activeClassName}>Works</NavLink></div>
             <div className={styles.item}><NavLink to='/diplomas' className={activeClassName}>Diplomas</NavLink></div>
             <div className={styles.item}><NavLink to='/contacts' className={activeClassName}>Contacts</NavLink></div>
+
+            <Friends />
         </nav>
     )
 }
