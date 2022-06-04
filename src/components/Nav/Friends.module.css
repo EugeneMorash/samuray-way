@@ -1,0 +1,13 @@
+
+.friendsBlock {
+    margin-top: 100px;
+}
+
+.friends {
+    display: flex;
+    justify-content: space-between;
+}
+
+.friend {
+    color: brown;
+}

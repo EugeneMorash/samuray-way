@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
@@ -8,7 +8,17 @@ type MyPostsPropsType = {
     posts: StateType
 }
 
+
+
 export function MyPosts(props: MyPostsPropsType) {
+
+    const newPostElement = useRef(null);
+
+    const onClickHandler = () => {
+        // @ts-ignore: Object is possibly 'null'
+        const text = newPostElement.current.value;
+        alert(text)
+    }
 
     return (
         <div className={styles.postsBlock}>
@@ -16,9 +26,9 @@ export function MyPosts(props: MyPostsPropsType) {
 
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
-                <button>Add post</button>
+                <button onClick={onClickHandler}>Add post</button>
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>

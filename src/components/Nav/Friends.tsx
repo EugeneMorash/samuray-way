@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Friends.module.css'
 
 
 
@@ -6,8 +7,18 @@ import React from 'react';
 
 export function Friends() {
     return (
-        <div>
-            111
+        <div className={styles.friendsBlock}>
+            <div className={styles.friends}>
+                <div className={styles.friend}>
+                    2222
+                </div>
+                <div className={styles.friend}>
+                    2222
+                </div>
+                <div className={styles.friend}>
+                    2222
+                </div>
+            </div>
         </div>
     );
 }
