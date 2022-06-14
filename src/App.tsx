@@ -10,8 +10,10 @@ import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
 import {StateType} from "./redux/state";
 
-type StatesType = {
-    state: StateType
+
+export type StatesType = {
+    state: StateType,
+    addPost: (postMessage: string) => void
 }
 
 const App = (props: StatesType) => {
@@ -28,7 +30,9 @@ const App = (props: StatesType) => {
                                    state={props.state}/>}/>
                         <Route path='/main/*'
                                element={<Profile
-                                   state={props.state}/>}/>
+                                   state={props.state}
+                                   addPost={props.addPost}
+                               />}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
                         <Route path='/contacts/*' element={<Contacts/>}/>

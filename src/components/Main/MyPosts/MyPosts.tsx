@@ -6,6 +6,7 @@ import {StateType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: StateType
+    addPost: (postMessage: string) => void
 }
 
 
@@ -17,7 +18,7 @@ export function MyPosts(props: MyPostsPropsType) {
     const onClickHandler = () => {
         // @ts-ignore: Object is possibly 'null'
         const text = newPostElement.current.value;
-        alert(text)
+        props.addPost(text)
     }
 
     return (
