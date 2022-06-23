@@ -3,7 +3,7 @@ import styles from './../Dialogs.module.css'
 
 
 type MessagePropsType = {
-    message: string
+    message: string | undefined
 }
 
 export function Message(props: MessagePropsType) {

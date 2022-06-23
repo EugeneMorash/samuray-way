@@ -1,24 +1,32 @@
-import React, {useRef} from 'react';
+import React, {LegacyRef, useRef} from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {StateType} from "../../../redux/state";
+import {StateType, updateNewPostText} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: StateType
-    addPost: (postMessage: string) => void
+    // addPost: (postMessage: string | undefined) => void
+    addPost: () => void
+    newPostText: string | undefined
+    updateNewPostText: (newText: string | undefined) => void
 }
 
 
 
 export function MyPosts(props: MyPostsPropsType) {
 
-    const newPostElement = useRef(null);
+    // const newPostElement = useRef(null);
+
+    const newPostElement: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
     const onClickHandler = () => {
-        // @ts-ignore: Object is possibly 'null'
-        const text = newPostElement.current.value;
-        props.addPost(text)
+        props.addPost()
+    }
+
+    const onPostChange = () => {
+        const text = newPostElement.current?.value;
+        props.updateNewPostText(text);
     }
 
     return (
@@ -27,7 +35,7 @@ export function MyPosts(props: MyPostsPropsType) {
 
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}/>
                 </div>
                 <button onClick={onClickHandler}>Add post</button>
                 <button>Remove</button>

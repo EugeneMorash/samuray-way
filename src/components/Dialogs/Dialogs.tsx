@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {LegacyRef} from 'react';
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -18,10 +18,10 @@ export function Dialogs(props: DialogsPropsType) {
 
     const messagesElements = props.state.dialogsPage.messagesData.map(message => <Message message={message.message}/>)
 
-    const newMessageText = useRef<HTMLTextAreaElement>(null)
+    // const newMessageText = useRef<HTMLTextAreaElement>(null)
 
     // ! сделать через createRef
-    // const newMessageText: LegacyRef<HTMLTextAreaElement> = React.createRef();
+    const newMessageText: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
     const onClickHandler = () => {
         // if (newMessageText.current) {
