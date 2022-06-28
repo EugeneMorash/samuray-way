@@ -1,5 +1,5 @@
 import React from 'react';
-import state, {addPost, StateType, subscribe, updateNewPostText} from "./redux/state";
+import store, {StateType} from "./redux/state";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
@@ -8,16 +8,16 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const rerenderEntireTree = () => {
+const _callSubscriber = () => {
     root.render(
 
-        <App state={state} addPost={addPost} newPostText={state.profilePage.newPostText} updateNewPostText={updateNewPostText}/>
+        <App state={store.getState()} addPost={store.addPost.bind(store)} newPostText={store.getState().profilePage.newPostText} updateNewPostText={store.updateNewPostText.bind(store)}/>
 
     )
 }
 
 
-rerenderEntireTree();
+_callSubscriber(store.getState());
 
 
-subscribe(rerenderEntireTree)
+store.subscribe(_callSubscriber)
