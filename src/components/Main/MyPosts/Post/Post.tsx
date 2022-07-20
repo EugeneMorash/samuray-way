@@ -1,16 +1,15 @@
 import React from 'react';
 import styles from './Post.module.css'
-import {StateType} from "../../../../redux/state";
+import {PostsType} from "../../../../redux/state";
 import a011 from "./images/a011.jpeg"
 
 type PostPropsTypes = {
-    state: StateType
-
+    posts: PostsType[]
 }
 
 export function Post(props: PostPropsTypes) {
 
-    const postsElements = props.state.profilePage.posts.map(
+    const postsElements = props.posts.map(
         (post) => {
             return <li className={styles.item}>
                 <img src={a011} alt="Avatar"/>

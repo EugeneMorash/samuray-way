@@ -8,17 +8,21 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
-import {StateType, updateNewPostText} from "./redux/state";
+import {ActionType, StoreType} from "./redux/state";
 
 
-export type StatesType = {
-    state: StateType,
-    addPost: (postMessage: string | undefined) => void
-    updateNewPostText: (newText: string | undefined) => void
-    newPostText: string | undefined
+export type PropsType = {
+    // _state: StateType,
+    // addPost: (postMessage: string) => void
+    // updateNewPostText: (newText: string) => void
+    // newPostText: string
+
+    dispatch: (action: ActionType) => void
+    store: StoreType
 }
 
-const App = (props: StatesType) => {
+const App = (props: PropsType) => {
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -29,13 +33,13 @@ const App = (props: StatesType) => {
                         {/* /dialogs/* --> exact */}
                         <Route path='/dialogs/*'
                                element={<Dialogs
-                                   state={props.state}/>}/>
+                                   state={props.store.getState().dialogsPage}
+                                   dispatch={props.dispatch}
+                               />}/>
                         <Route path='/main/*'
                                element={<Profile
-                                   state={props.state}
-                                   addPost={props.addPost}
-                                   newPostText={props.newPostText}
-                                   updateNewPostText={props.updateNewPostText}
+                                   state={props.store.getState().profilePage}
+                                   dispatch={props.dispatch}
                                />}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>

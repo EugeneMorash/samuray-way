@@ -1,15 +1,14 @@
-import React, {LegacyRef, useRef} from 'react';
+import React from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {StateType, updateNewPostText} from "../../../redux/state";
+import {ActionType, PostsType} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
-    posts: StateType
-    // addPost: (postMessage: string | undefined) => void
-    addPost: () => void
-    newPostText: string | undefined
-    updateNewPostText: (newText: string | undefined) => void
+    posts: PostsType[]
+    newPostText: string
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -18,15 +17,13 @@ export function MyPosts(props: MyPostsPropsType) {
 
     // const newPostElement = useRef(null);
 
-    const newPostElement: LegacyRef<HTMLTextAreaElement> = React.createRef();
-
-    const onClickHandler = () => {
-        props.addPost()
+    const addPost = () => {
+        props.dispatch(addPostActionCreator())
     }
 
     const onPostChange = () => {
-        const text = newPostElement.current?.value;
-        props.updateNewPostText(text);
+        const action = (updateNewPostTextActionCreator(props.newPostText));
+        props.dispatch(action)
     }
 
     return (
@@ -35,13 +32,16 @@ export function MyPosts(props: MyPostsPropsType) {
 
             <div>
                 <div>
-                    <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}/>
+                    <textarea
+                        onChange={onPostChange}
+                        value={props.newPostText}
+                    />
                 </div>
-                <button onClick={onClickHandler}>Add post</button>
+                <button onClick={addPost}>Add post</button>
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post state={props.posts}/>
+                <Post posts={props.posts}/>
             </div>
         </div>
 

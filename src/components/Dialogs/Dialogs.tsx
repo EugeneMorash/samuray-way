@@ -1,39 +1,40 @@
-import React, {LegacyRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {StateType} from "../../redux/state";
+import {ActionType, DialogsPageType} from "../../redux/state";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
-    state: StateType
+    state: DialogsPageType
+    dispatch: (action: ActionType) => void
 }
 
 
 export function Dialogs(props: DialogsPropsType) {
 
-    const dialogsElements = props.state.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name}
-                                                                                          id={dialog.id}/>
+
+    const dialogsElements = props.state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>
     )
 
-    const messagesElements = props.state.dialogsPage.messagesData.map(message => <Message message={message.message}/>)
+    const messagesElements = props.state.messagesData.map(message => <Message message={message.message}/>)
 
+
+    //
     // const newMessageText = useRef<HTMLTextAreaElement>(null)
-
     // ! сделать через createRef
-    const newMessageText: LegacyRef<HTMLTextAreaElement> = React.createRef();
+    // const newMessageText: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
-    const onClickHandler = () => {
-        // if (newMessageText.current) {
-        //     const text = newMessageText.current.value
-        //     alert(text)
-        // }
 
-        const text = newMessageText.current?.value
+    const onSendMessageClick = () => {
+        props.dispatch(sendMessageCreator(props.state.newMessageBody))
+    };
 
-        // const text = newMessageText.current && newMessageText.current.value
-        alert(text)
-    }
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        // let body = e.currentTarget.value
+        props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
+    };
 
     return (
         <div className={styles.dialogs}>
@@ -41,12 +42,27 @@ export function Dialogs(props: DialogsPropsType) {
                 {dialogsElements}
             </div>
             <div className={styles.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div>
+                    <div>
+                        <textarea
+                            value={props.state.newMessageBody}
+                            onChange={onNewMessageChange}
+                            placeholder={'Enter new message'}>
+
+                        </textarea>
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>
+                            Send
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div className={styles.newText}>
-                <textarea ref={newMessageText}></textarea>
-                <button type='button' onClick={onClickHandler}>Add new message</button>
-            </div>
+            {/*<div className={styles.newText}>*/}
+            {/*    <textarea ref={newMessageText}></textarea>*/}
+            {/*    <button type='button' onClick={onClickHandler}>Add new message</button>*/}
+            {/*</div>*/}
         </div>
     );
 }

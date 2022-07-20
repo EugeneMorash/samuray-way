@@ -1,7 +1,9 @@
 import React from 'react';
-import store, {StateType} from "./redux/state";
+
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import store from "./redux/state";
+
 
 
 const root = ReactDOM.createRoot(
@@ -11,13 +13,18 @@ const root = ReactDOM.createRoot(
 const _callSubscriber = () => {
     root.render(
 
-        <App state={store.getState()} addPost={store.addPost.bind(store)} newPostText={store.getState().profilePage.newPostText} updateNewPostText={store.updateNewPostText.bind(store)}/>
+        <App
+            dispatch={store.dispatch.bind(store)}
+            store={store}
+        />
 
     )
 }
 
 
-_callSubscriber(store.getState());
-
-
 store.subscribe(_callSubscriber)
+// _callSubscriber(store.getState());
+// store.subscribe(() => {
+//     let state = store.getState()
+//     _callSubscriber(state)
+// })
