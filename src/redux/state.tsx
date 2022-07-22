@@ -1,9 +1,53 @@
-import {profileReducer} from "./profile-reducer";
-import {dialogsReducer, SendMessageAT, UpdateNewMessageBodyAT} from "./dialogs-reducer";
-import {sidebarReducer} from "./sidebar-reducer";
+//* ---------- Types ---------- *//
 
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>,
+    newPostText: string
+}
+
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type DialogsPageType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+}
+
+export type DialogsDataType = {
+    id: number
+    name: string
+}
+
+export type MessagesDataType = {
+    id: number
+    message: string
+}
+
+export type StoreType = {
+    _state: StateType
+
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: (state: StateType) => void) => void
+}
+
+//* ---------- Types ---------- *// END
+
+//* ---------- Store ---------- *//
 
 const store: StoreType = {
+
     _state: {
         profilePage: {
             posts: [
@@ -28,74 +72,40 @@ const store: StoreType = {
                 {id: 3, message: 'Shalom!'},
                 {id: 4, message: 'Buenos Dias!'},
                 {id: 5, message: 'Privet!'}
-            ],
-            newMessageBody: ''
-        },
-        sidebar: {}
+            ]
+        }
     },
-
-    _callSubscriber() {},
 
     getState() {
-        return this._state;
-    },
-    subscribe(observer) {
-        this._callSubscriber = observer
+        return this._state
     },
 
-    dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-        this._callSubscriber(this._state)
+    _callSubscriber() {
+
+    },
+
+    addPost() {
+        const newPost: PostsType = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        }
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber(this._state);
+    },
+
+    updateNewPostText(newText) {
+
+        this._state.profilePage.newPostText = newText;
+        this._callSubscriber(this._state);
+    },
+
+    subscribe(observer) {
+        this._callSubscriber = observer
     }
 }
 
-export type ActionType = UpdateNewMessageBodyAT | SendMessageAT
 
-export type StoreType = {
-    _state: StateType
-    _callSubscriber: (state: StateType) => void
+export default store
 
-    getState: () => StateType
-    subscribe: (observer: (state: StateType) => void) => void
-    dispatch: (action: ActionType) => void
-    // newPostText: string
-    // addPost: () => void
-    // updateNewPostText: () => void
-}
-
-
-export type StateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sidebar: SidebarType
-}
-export type ProfilePageType = {
-    posts: Array<PostsType>,
-    newPostText: string
-}
-export type PostsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-export type DialogsPageType = {
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessagesDataType>
-    newMessageBody: string
-}
-
-export type SidebarType = {}
-export type DialogsDataType = {
-    id: number
-    name: string
-}
-export type MessagesDataType = {
-    id: number
-    message: string
-}
-
-
-export default store;
-// window.store = store;

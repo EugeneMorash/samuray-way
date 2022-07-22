@@ -1,30 +1,29 @@
 import React from 'react';
-
+import store, {StateType} from "./redux/state";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import store from "./redux/state";
 
+// export type IndexTypes = {
+//     rerenderEntireTree: (state: StateType) => void
+// }
 
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const _callSubscriber = () => {
+const rerenderEntireTree = (state: StateType) => {
+
+
     root.render(
-
-        <App
-            dispatch={store.dispatch.bind(store)}
-            store={store}
-        />
-
+        <App state={state}
+             addPost={store.addPost.bind(store)}
+             updateNewPostText={store.updateNewPostText.bind(store)}/>
     )
 }
 
 
-store.subscribe(_callSubscriber)
-// _callSubscriber(store.getState());
-// store.subscribe(() => {
-//     let state = store.getState()
-//     _callSubscriber(state)
-// })
+rerenderEntireTree(store.getState());
+
+
+store.subscribe(rerenderEntireTree) //? store subscribe signature

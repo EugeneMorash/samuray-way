@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {ActionType, PostsType} from "../../../redux/state";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {ProfilePageType} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    posts: PostsType[]
-    newPostText: string
-    dispatch: (action: ActionType) => void
+    profilePage: ProfilePageType
+    // addPost: (postMessage: string | undefined) => void
+    addPost: () => void
+    // newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 
@@ -16,14 +17,18 @@ type MyPostsPropsType = {
 export function MyPosts(props: MyPostsPropsType) {
 
     // const newPostElement = useRef(null);
+    // const newPostElement: LegacyRef<HTMLTextAreaElement> = React.createRef();
+
+
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     }
 
-    const onPostChange = () => {
-        const action = (updateNewPostTextActionCreator(props.newPostText));
-        props.dispatch(action)
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        // @ts-ignore
+        // const text = newPostElement.current.value;
+        props.updateNewPostText(e.currentTarget.value);
     }
 
     return (
@@ -32,16 +37,13 @@ export function MyPosts(props: MyPostsPropsType) {
 
             <div>
                 <div>
-                    <textarea
-                        onChange={onPostChange}
-                        value={props.newPostText}
-                    />
+                    <textarea onChange={onPostChange} value={props.profilePage.newPostText}/>
                 </div>
                 <button onClick={addPost}>Add post</button>
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post posts={props.posts}/>
+                <Post posts={props.profilePage.posts}/>
             </div>
         </div>
 

@@ -5,13 +5,14 @@ import a011 from "./images/a011.jpeg"
 
 type PostPropsTypes = {
     posts: PostsType[]
+
 }
 
 export function Post(props: PostPropsTypes) {
 
     const postsElements = props.posts.map(
         (post) => {
-            return <li className={styles.item}>
+            return <li className={styles.item} key={post.id}>
                 <img src={a011} alt="Avatar"/>
                 {post.message}
                 <div>Likes: {post.likesCount}</div>
