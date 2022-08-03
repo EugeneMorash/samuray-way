@@ -8,14 +8,14 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
-import {StateType} from "./redux/state";
+import {StateType} from "./redux/store";
 
 
 export type StatesType = {
     state: StateType,
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    // newPostText: string
+
+
+    dispatch: () => void
 }
 
 const App = (props: StatesType) => {
@@ -34,9 +34,7 @@ const App = (props: StatesType) => {
                         <Route path='/main/*'
                                element={<Profile
                                    profilePage={props.state.profilePage}
-                                   addPost={props.addPost}
-                                   // newPostText={props.newPostText}
-                                   updateNewPostText={props.updateNewPostText}
+                                   dispatch={props.dispatch}
                                />}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>

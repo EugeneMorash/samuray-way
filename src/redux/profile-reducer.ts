@@ -1,4 +1,4 @@
-import {ActionType} from "./state";
+import {ActionType} from "./store";
 
 type PostsType = {
     id: number
@@ -9,6 +9,9 @@ type PostsType = {
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
+export type AddPostAT = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostTextAT = ReturnType<typeof updateNewPostTextActionCreator>
+
 const initialState = {
     posts: [
         {id: 1, message: 'Hi! Let\'s go working!', likesCount: 18},
@@ -18,8 +21,10 @@ const initialState = {
     newPostText: ''
 }
 
-export const profileReducer = (state = initialState, action: ActionType) => {
+type StateType = typeof initialState
 
+export const profileReducer = (state: StateType = initialState, action: ActionType) => {
+    
 
     switch (action.type) {
         case ADD_POST:
@@ -37,8 +42,12 @@ export const profileReducer = (state = initialState, action: ActionType) => {
         default:
             return state;
     }
-}
+};
 
-export const addPostActionCreator = () => ({type: 'ADD-POST'})
-export const updateNewPostTextActionCreator = (text) =>
-    ({type: typeof UPDATE_NEW_POST_TEXT, newText: text})
+export const addPostActionCreator = () => ({
+    type: ADD_POST
+}) as const
+export const updateNewPostTextActionCreator = (text: string) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+}) as const
