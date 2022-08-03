@@ -1,8 +1,8 @@
 import React from 'react';
-import store, {StateType} from "./redux/store";
+import {StateType} from "./redux/store";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-
+import store from "./redux/redux-store";
 
 
 const root = ReactDOM.createRoot(
@@ -23,4 +23,7 @@ const rerenderEntireTree = (state: StateType) => {
 rerenderEntireTree(store.getState());
 
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+    const state = store.getState()
+    rerenderEntireTree(state)
+})

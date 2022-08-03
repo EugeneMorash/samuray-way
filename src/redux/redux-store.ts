@@ -4,13 +4,13 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 
-let reducers = combineReducers({
+const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 });
 
-let appStore = createStore(reducers);
+const store = createStore(reducers);
 
 
-export default appStore;
+export default store;

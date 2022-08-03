@@ -12,7 +12,7 @@ import {StateType} from "./redux/store";
 
 
 export type StatesType = {
-    state: StateType,
+    state: StateType
 
 
     dispatch: () => void
