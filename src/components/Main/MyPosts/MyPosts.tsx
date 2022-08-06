@@ -2,34 +2,36 @@ import React, {ChangeEvent} from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {ProfilePageType, store} from "../../../redux/store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
+import {AppRootStateType} from "../../../redux/redux-store";
 
 type MyPostsPropsType = {
-    profilePage: ProfilePageType
-    dispatch: (type: string) => void
+    addPost: () => void
+    updateNewPostText: (text: string) => void
+
+    state: AppRootStateType
+
 }
 
 
 export function MyPosts(props: MyPostsPropsType) {
 
-    // const postsElements =
-    //     props.posts.map(p => <Post
-    //         message={p.message}
-    //         likesCount={p.likesCount}
-    //     />)
-
+    // const postsElements = props.state.profilePage.posts.map((p) =>
+    //         <Post
+    //             message={p.message}
+    //             likesCount={p.likesCount}
+    //         />)
+    //
     // const newPostElement = React.createRef();
 
-    const addPost = () => {
-        store.dispatch(addPostActionCreator())
+    const onAddPost = () => {
+        props.addPost()
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 
         let text = e.currentTarget.value
 
-        store.dispatch(updateNewPostTextActionCreator(text))
+        props.updateNewPostText(text)
     }
 
     return (
@@ -37,13 +39,13 @@ export function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} value={props.profilePage.newPostText}/>
+                    <textarea onChange={onPostChange} value={props.state.profilePage.newPostText}/>
                 </div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onAddPost}>Add post</button>
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post posts={props.profilePage.posts}/>
+                <Post posts={props.state.profilePage.posts}/>
             </div>
         </div>
     );

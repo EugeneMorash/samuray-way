@@ -1,20 +1,20 @@
 import React from 'react';
-import {StateType} from "./redux/store";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import store from "./redux/redux-store";
+import {AppRootStateType, store} from "./redux/redux-store";
 
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const rerenderEntireTree = (state: StateType) => {
+const rerenderEntireTree = (state: AppRootStateType) => {
 
 
     root.render(
         <App state={state}
              dispatch={store.dispatch.bind(store)}
+
         />
     )
 }

@@ -1,4 +1,4 @@
-import {ActionType} from "./store";
+import {ActionType} from "./redux-store";
 
 type PostsType = {
     id: number
@@ -21,9 +21,9 @@ const initialState = {
     newPostText: ''
 }
 
-type StateType = typeof initialState
+export type PostsStateType = typeof initialState
 
-export const profileReducer = (state: StateType = initialState, action: ActionType) => {
+export const profileReducer = (state: PostsStateType = initialState, action: ActionType) => {
     
 
     switch (action.type) {

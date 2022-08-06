@@ -1,4 +1,5 @@
-import {ActionType} from "./store";
+import {ActionType} from "./redux-store";
+import {v1} from "uuid";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -17,26 +18,35 @@ const initialState = {
         {id: 6, name: 'Michael'}
     ],
     messagesData: [
-        {id: 1, message: 'What\'s up?'},
-        {id: 2, message: 'Hi!'},
-        {id: 3, message: 'Shalom!'},
-        {id: 4, message: 'Buenos Dias!'},
-        {id: 5, message: 'Privet!'}
+        {id: v1(), message: 'What\'s up?'},
+        {id: v1(), message: 'Hi!'},
+        {id: v1(), message: 'Shalom!'},
+        {id: v1(), message: 'Buenos Dias!'},
+        {id: v1(), message: 'Privet!'}
     ],
     newMessageBody: ''
 }
 
-type StateType = typeof initialState
 
+type MessageType = {
+    id: string
+    message: string
+}
 
-export const dialogsReducer = (state: StateType = initialState, action: ActionType) => {
+export type DialogStateType = typeof initialState
+
+export const dialogsReducer = (state: DialogStateType = initialState, action: ActionType) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body
             return state;
         case SEND_MESSAGE:
-            state.messagesData.push({id: new Date().getTime(), message: action.body})
+            const newMessage: MessageType = {
+                id: v1(),
+                message: state.newMessageBody
+            }
+            state.messagesData.push(newMessage)
             state.newMessageBody = ''
 
             return state;
@@ -45,9 +55,9 @@ export const dialogsReducer = (state: StateType = initialState, action: ActionTy
     }
 }
 
-export const sendMessageCreator = (body: string) => ({
-    type: SEND_MESSAGE,
-    body
+
+export const sendMessageCreator = () => ({
+    type: SEND_MESSAGE
 }) as const
 
 export const updateNewMessageBodyCreator = (body: string) => ({
