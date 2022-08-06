@@ -1,6 +1,9 @@
 import {ActionType} from "./redux-store";
 
-type PostsType = {
+
+export type PostsType = Array<PostType>
+
+type PostType = {
     id: number
     message: string
     likesCount: number
@@ -28,7 +31,7 @@ export const profileReducer = (state: PostsStateType = initialState, action: Act
 
     switch (action.type) {
         case ADD_POST:
-            const newPost: PostsType = {
+            const newPost: PostType = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0

@@ -7,15 +7,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
-import {ActionType, AppRootStateType} from "./redux/redux-store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-export type PropsType = {
-    dispatch: (action: ActionType) => void
-    state: AppRootStateType
-}
 
-const App = (props: PropsType) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -24,14 +19,9 @@ const App = (props: PropsType) => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs/*'
-                               element={<DialogsContainer
-                                   state={props.state}
-                                    dispatch={props.dispatch}
-                               />}/>
+                               element={<DialogsContainer />}/>
                         <Route path='/main/*'
-                               element={<Profile
-                                   state={props.state}
-                               />}/>
+                               element={<Profile />}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
                         <Route path='/contacts/*' element={<Contacts/>}/>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import {AppRootStateType, store} from "./redux/redux-store";
+import {MyProvider} from "./StoreContext";
 
 
 const root = ReactDOM.createRoot(
@@ -12,10 +13,9 @@ const rerenderEntireTree = (state: AppRootStateType) => {
 
 
     root.render(
-        <App state={state}
-             dispatch={store.dispatch.bind(store)}
-
-        />
+        <MyProvider store={store}>
+            <App />
+        </MyProvider>
     )
 }
 

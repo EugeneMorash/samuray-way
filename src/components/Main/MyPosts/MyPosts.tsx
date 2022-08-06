@@ -3,25 +3,20 @@ import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import {AppRootStateType} from "../../../redux/redux-store";
+import {PostsType} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
     addPost: () => void
     updateNewPostText: (text: string) => void
 
     state: AppRootStateType
+    posts: PostsType
 
+    newPostText: string
 }
 
 
 export function MyPosts(props: MyPostsPropsType) {
-
-    // const postsElements = props.state.profilePage.posts.map((p) =>
-    //         <Post
-    //             message={p.message}
-    //             likesCount={p.likesCount}
-    //         />)
-    //
-    // const newPostElement = React.createRef();
 
     const onAddPost = () => {
         props.addPost()
@@ -39,13 +34,13 @@ export function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange} value={props.state.profilePage.newPostText}/>
+                    <textarea onChange={onPostChange} value={props.newPostText}/>
                 </div>
                 <button onClick={onAddPost}>Add post</button>
                 <button>Remove</button>
             </div>
             <div className={styles.posts}>
-                <Post posts={props.state.profilePage.posts}/>
+                <Post posts={props.posts}/>
             </div>
         </div>
     );
