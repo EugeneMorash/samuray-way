@@ -1,29 +1,26 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import {AppRootStateType, store} from "./redux/redux-store";
-import {MyProvider} from "./StoreContext";
+import {store} from "./redux/redux-store";
+import {Provider} from "react-redux";
 
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const rerenderEntireTree = (state: AppRootStateType) => {
-
-
+const rerenderEntireTree = () => {
     root.render(
-        <MyProvider store={store}>
-            <App />
-        </MyProvider>
+        <Provider store={store}>
+            <App/>
+        </Provider>
     )
 }
 
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 
 store.subscribe(() => {
-    const state = store.getState()
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 })

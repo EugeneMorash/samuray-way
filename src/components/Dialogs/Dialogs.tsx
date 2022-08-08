@@ -11,8 +11,9 @@ type DialogsPropsType = {
 
     updateNewMessageBody: (e: string) => void
     sendMessage: () => void
-}
 
+    newMessageBody: string
+}
 
 export function Dialogs(props: DialogsPropsType) {
 
@@ -24,9 +25,6 @@ export function Dialogs(props: DialogsPropsType) {
     )
 
     const messagesElements = state.messagesData.map(message => <Message message={message.message}/>)
-
-    // const newMessageText = useRef<HTMLTextAreaElement>(null)
-
 
     const newMessageText: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
@@ -48,7 +46,7 @@ export function Dialogs(props: DialogsPropsType) {
                 {messagesElements}
             </div>
             <div className={styles.newText}>
-                <textarea ref={newMessageText} onChange={onNewMessageChange}></textarea>
+                <textarea ref={newMessageText} onChange={onNewMessageChange} value={props.newMessageBody}></textarea>
                 <button type='button' onClick={onSendMessageClick}>Add new message</button>
             </div>
         </div>
