@@ -2,16 +2,13 @@ import React, {ChangeEvent} from 'react';
 import './MyPosts.module.css'
 import styles from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {AppRootStateType} from "../../../redux/redux-store";
 import {PostsType} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
     addPost: () => void
     updateNewPostText: (text: string) => void
 
-    state: AppRootStateType
     posts: PostsType
-
     newPostText: string
 }
 

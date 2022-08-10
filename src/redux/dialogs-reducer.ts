@@ -47,7 +47,7 @@ export const dialogsReducer = (state: DialogStateType = initialState, action: Ac
             return {
                 ...state,
                 newMessageBody: '',
-                messagesData: [...state.messagesData, {id: 6, message: body}]
+                messagesData: [...state.messagesData, {id: action.id, message: body}]
             }
         default:
             return state;
@@ -56,7 +56,8 @@ export const dialogsReducer = (state: DialogStateType = initialState, action: Ac
 
 
 export const sendMessageCreator = () => ({
-    type: SEND_MESSAGE
+    type: SEND_MESSAGE,
+    id: new Date().getTime()
 }) as const
 
 export const updateNewMessageBodyCreator = (body: string) => ({

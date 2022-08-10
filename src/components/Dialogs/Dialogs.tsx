@@ -2,18 +2,9 @@ import React, {ChangeEvent, LegacyRef} from 'react';
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogStateType} from "../../redux/dialogs-reducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
-type DialogsPropsType = {
-
-    dialogsPage: DialogStateType
-
-    updateNewMessageBody: (e: string) => void
-    sendMessage: () => void
-
-    newMessageBody: string
-}
 
 export function Dialogs(props: DialogsPropsType) {
 
