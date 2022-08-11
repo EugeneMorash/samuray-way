@@ -8,6 +8,7 @@ import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
                                element={<DialogsContainer />}/>
                         <Route path='/main/*'
                                element={<Profile />}/>
+                        <Route path='/users/*' element={<Users/>}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
                         <Route path='/contacts/*' element={<Contacts/>}/>
