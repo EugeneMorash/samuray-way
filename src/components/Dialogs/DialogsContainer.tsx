@@ -5,7 +5,6 @@ import {AppRootStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
 
-
 type MapStateToPropsType = {
     dialogsPage: DialogStateType
     newMessageBody: string
@@ -15,7 +14,6 @@ type MapDispatchToPropsType = {
     sendMessage: () => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {

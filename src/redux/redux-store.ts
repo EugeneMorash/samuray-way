@@ -2,25 +2,26 @@ import {combineReducers, legacy_createStore as createStore} from "redux";
 import {AddPostAT, profileReducer, UpdateNewPostTextAT} from "./profile-reducer";
 import {dialogsReducer, SendMessageAT, UpdateNewMessageBodyAT} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
-import {FollowAT, SetUsersAT, UnfollowAT, usersReducer} from "./users-reducer";
+import {UserActionTypes, usersReducer} from "./users-reducer";
 
 
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
-    users: usersReducer
+    usersPage: usersReducer
 });
 
 export type AppRootStateType = ReturnType<typeof reducers>
 
+
+// FIXME:
+// ProfilAT  4x (reducers)
 export type ActionType = AddPostAT |
     UpdateNewPostTextAT |
     UpdateNewMessageBodyAT |
     SendMessageAT |
-    FollowAT |
-    UnfollowAT |
-    SetUsersAT
+    UserActionTypes
 
 
 // Добавить тип корневого стейта

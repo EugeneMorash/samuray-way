@@ -8,7 +8,7 @@ import {Works} from "./components/Works/Works";
 import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 const App = () => {
@@ -20,10 +20,10 @@ const App = () => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs/*'
-                               element={<DialogsContainer />}/>
+                               element={<DialogsContainer/>}/>
                         <Route path='/main/*'
-                               element={<Profile />}/>
-                        <Route path='/users/*' element={<Users/>}/>
+                               element={<Profile/>}/>
+                        <Route path='/users/*' element={<UsersContainer/>}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
                         <Route path='/contacts/*' element={<Contacts/>}/>

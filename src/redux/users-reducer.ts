@@ -5,33 +5,31 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 
+export type UserActionTypes = FollowAT | UnfollowAT | SetUsersAT
 export type FollowAT = ReturnType<typeof followAC>
 export type UnfollowAT = ReturnType<typeof unfollowAC>
 export type SetUsersAT = ReturnType<typeof setUsersAC>
 
 
-type UserType = {
-    id: number,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: LocationType
+export type UserType = {
+    name: string
+    id: number
+    uniqueUrlName: string
+    photos: PhotosType
+    status: string
+    followed: boolean
 }
-
-type LocationType = {
-    city: string,
-    country: string
+export type PhotosType = {
+    small: string,
+    large: string
 }
-
 const initialState = {
-    users: [
-        // {id: 1, followed: false, fullName: 'Egor', status: 'Cool', location: {city: 'Moscow', country: 'Russia'}},
-        // {id: 2, followed: true, fullName: 'Dmitry', status: 'Not cool', location: {city: 'Minsk', country: 'Belarus'}},
-        // {id: 3, followed: true, fullName: 'Sasha', status: 'Fine', location: {city: 'Zhlobinsk', country: 'Uruguay'}}
-    ]
+    users: [] as UserType[]
 }
-
 export type UsersStateType = typeof initialState
+
+
+
 
 export const usersReducer = (state: UsersStateType = initialState, action: ActionType) => {
     switch (action.type) {
@@ -52,7 +50,7 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
         default:
             return state
