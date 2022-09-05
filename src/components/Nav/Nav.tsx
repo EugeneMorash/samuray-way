@@ -14,6 +14,7 @@ export function Nav() {
                 <NavLink to='/main' className={activeClassName}>Profile</NavLink>
             </div>
             <div className={styles.item}><NavLink to='/dialogs' className={activeClassName}>Messages</NavLink></div>
+            <div className={styles.item}><NavLink to='/users' className={activeClassName}>Users</NavLink></div>
             <div className={styles.item}><NavLink to='/works' className={activeClassName}>Works</NavLink></div>
             <div className={styles.item}><NavLink to='/diplomas' className={activeClassName}>Diplomas</NavLink></div>
             <div className={styles.item}><NavLink to='/contacts' className={activeClassName}>Contacts</NavLink></div>

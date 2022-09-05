@@ -1,19 +1,14 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {AppRootStateType} from "../../redux/redux-store";
 
-type ProfilePropsType = {
-    state: AppRootStateType
-}
 
-export function Profile(props: ProfilePropsType) {
+
+export function Profile() {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer
-                state={props.state}
-            />
+            <MyPostsContainer />
         </div>
     )
 }

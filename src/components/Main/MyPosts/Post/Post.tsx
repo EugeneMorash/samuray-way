@@ -1,16 +1,12 @@
 import React from 'react';
 import styles from './Post.module.css'
 import a011 from "./images/a011.jpeg"
+import {PostsType} from "../../../../redux/profile-reducer";
 
 type PostPropsTypes = {
-    posts: Array<PostType>
+    posts: PostsType
 }
 
-type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
 
 export function Post(props: PostPropsTypes) {
 

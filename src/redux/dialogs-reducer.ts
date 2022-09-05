@@ -1,5 +1,4 @@
 import {ActionType} from "./redux-store";
-import {v1} from "uuid";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -18,38 +17,38 @@ const initialState = {
         {id: 6, name: 'Michael'}
     ],
     messagesData: [
-        {id: v1(), message: 'What\'s up?'},
-        {id: v1(), message: 'Hi!'},
-        {id: v1(), message: 'Shalom!'},
-        {id: v1(), message: 'Buenos Dias!'},
-        {id: v1(), message: 'Privet!'}
+        {id: 1, message: 'What\'s up?'},
+        {id: 2, message: 'Hi!'},
+        {id: 3, message: 'Shalom!'},
+        {id: 4, message: 'Buenos Dias!'},
+        {id: 5, message: 'Privet!'}
     ],
     newMessageBody: ''
 }
 
-
-type MessageType = {
-    id: string
-    message: string
-}
+// type MessageType = {
+//     id: number
+//     message: string
+// }
 
 export type DialogStateType = typeof initialState
 
 export const dialogsReducer = (state: DialogStateType = initialState, action: ActionType) => {
 
+
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body
-            return state;
-        case SEND_MESSAGE:
-            const newMessage: MessageType = {
-                id: v1(),
-                message: state.newMessageBody
+            return {
+                ...state,
+                newMessageBody: action.body
             }
-            state.messagesData.push(newMessage)
-            state.newMessageBody = ''
-
-            return state;
+        case SEND_MESSAGE:
+            let body = state.newMessageBody
+            return {
+                ...state,
+                newMessageBody: '',
+                messagesData: [...state.messagesData, {id: action.id, message: body}]
+            }
         default:
             return state;
     }
@@ -57,7 +56,8 @@ export const dialogsReducer = (state: DialogStateType = initialState, action: Ac
 
 
 export const sendMessageCreator = () => ({
-    type: SEND_MESSAGE
+    type: SEND_MESSAGE,
+    id: new Date().getTime()
 }) as const
 
 export const updateNewMessageBodyCreator = (body: string) => ({
