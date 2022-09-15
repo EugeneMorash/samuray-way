@@ -71,7 +71,8 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         case SET_TOTAL_COUNT:
             return {
                 ...state,
-                totalUserCount: action.totalCount
+                // totalUserCount: action.totalCount // пока убрал чтобы не тупило
+                totalUserCount: 50
             }
         default:
             return state
