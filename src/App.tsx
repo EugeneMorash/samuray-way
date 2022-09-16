@@ -9,6 +9,7 @@ import {Diplomas} from "./components/Diplomas/Diplomas";
 import {Contacts} from "./components/Contacts/Contacts";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {ProfileContainer} from "./components/Main/ProfileContainer";
 
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
                         <Route path='/dialogs/*'
                                element={<DialogsContainer/>}/>
                         <Route path='/main/*'
-                               element={<Profile/>}/>
+                               element={<ProfileContainer/>}/>
                         <Route path='/users/*' element={<UsersContainer/>}/>
                         <Route path='/works/*' element={<Works/>}/>
                         <Route path='/diplomas/*' element={<Diplomas/>}/>
